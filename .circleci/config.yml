@@ -1,0 +1,22 @@
+version: 2
+jobs:
+  build:
+    machine: true
+    steps:
+      - checkout
+    # build the application image
+    - run: docker build -t duncdrum/app:$CIRCLE_BRANCH .
+
+    # working_directory: /app
+    # docker:
+    #   - image: docker:17.03.0-ce-git
+    # steps:
+    #   - checkout
+    #   - setup_remote_docker
+    #     docker_layer_caching: true
+    #   - run:
+    #       name: build
+    #       command: docker build -t app
+    #   - run:
+    #       name: Print the Current Time
+    #       command: date
