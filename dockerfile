@@ -3,7 +3,7 @@ FROM openjdk:8-jdk-alpine as builder
 LABEL maintainer="Duncan Paterson <d.paterson@me.com>" \
       org.label-schema.build-date="$(date --iso)" \
       org.label-schema.vcs-ref="$(git rev-parse --short HEAD)" \
-      org.label-schema.vcs-url="https://github.com/duncdrum/exist-db" \
+      org.label-schema.vcs-url="https://github.com/duncdrum/exist-docker" \
       org.label-schema.schema-version="1.0"
 
 ARG VCS_REF

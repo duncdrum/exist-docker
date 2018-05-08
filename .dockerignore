@@ -1,5 +1,6 @@
 .github/
 .idea/
+.DS_Store
 *.md
 *.tmpl
 .travis.yml

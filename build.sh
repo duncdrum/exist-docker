@@ -67,6 +67,7 @@ minify_exist() {
 	fi
 
 	# copy sundries
+	# DP: why? add them to dockerignore would be more like it
 	cp "${EXIST_CLONE}/LICENSE" "${EXIST_CLONE}/README.md" "${EXIST_MINIMAL}"
 
 	# copy base folders
@@ -78,9 +79,11 @@ minify_exist() {
 	cp -r "${EXIST_CLONE}/lib/core" "${EXIST_CLONE}/lib/endorsed" "${EXIST_CLONE}/lib/optional" "${EXIST_CLONE}/lib/extensions" "${EXIST_CLONE}/lib/user" "${EXIST_CLONE}/lib/test" "${EXIST_MINIMAL}/lib"
 
 	# copy config files
+	# DP: this needs to go into src folder in docker repo
 	cp "${EXIST_CLONE}/descriptor.xml" "${EXIST_CLONE}/log4j2.xml" "${EXIST_CLONE}/mime-types.xml" "${EXIST_MINIMAL}"
 
 	# copy tools
+	# DP: do we need to keep them or can they be discarded after the build?
 	mkdir -p "${EXIST_MINIMAL}/tools"
 	cp -r "${EXIST_CLONE}/tools/ant" "${EXIST_CLONE}/tools/aspectj" "${EXIST_CLONE}/tools/jetty" "${EXIST_MINIMAL}/tools"
 
@@ -102,6 +105,7 @@ minify_exist() {
 	copy_extension_libs indexes/lucene
 }
 
+# DP: I do not undertand what is going on here, and more importantly why here and not in dockerfile
 # Extract arguments
 EXPERIMENTAL=YES          # YES to use Docker experimental features, NO otherwise
 MINIMAL=NO                # YES to create a minimal eXist-db server Docker image,$ NO for a full image
