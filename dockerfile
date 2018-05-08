@@ -10,8 +10,8 @@ ARG VCS_REF
 ARG BUILD_DATE
 
 # env for builder
-ENV EXIST_HOME /usr/local/eXist
-ENV EXIST_DATA_DIR webapp/WEB-INF/data
+# ENV EXIST_HOME /usr/local/eXist
+# ENV EXIST_DATA_DIR webapp/WEB-INF/data
 ENV INSTALL_PATH /target
 
 # Install tools required to build the project
@@ -26,13 +26,14 @@ RUN apk add --no-cache --virtual .build-deps \
         bash \
         curl \
         git \
-        && bash ./build.sh eXist develop \
+        && bash ./build.sh --minimal eXist develop \
         && rm -rf tmp \
         && apk del .build-deps
 
 
 FROM gcr.io/distroless/java:latest
-COPY --from=builder /target/exist /exist
+COPY --from=builder /target/exist-minimal /exist
+COPY --from=builder /target/conf.xml /exist/conf.xml
 
 ENV LANG C.UTF-8
 
