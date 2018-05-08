@@ -1,0 +1,7 @@
+.github/
+.idea/
+*.md
+*.tmpl
+.travis.yml
+appveyor.yml
+*.bat
