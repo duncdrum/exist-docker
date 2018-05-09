@@ -8,6 +8,8 @@ LABEL maintainer="Duncan Paterson <d.paterson@me.com>" \
 
 ARG VCS_REF
 ARG BUILD_DATE
+ARG MAX_MEM=2048
+ARG CACHE_MEM=256
 
 # env for builder
 ENV INSTALL_PATH /target
