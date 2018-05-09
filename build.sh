@@ -246,20 +246,20 @@ then
 fi
 
 # Build Docker image
-EXPERIMENTAL_ARGS=""
-if [ "$EXPERIMENTAL" == "YES" ]
-then
-	EXPERIMENTAL_ARGS="--squash"
-fi
-
-BRANCH_NAME="${BRANCH_NAME}${SUFFIX}"
-
-if [ ! -f "$DOCKERFILE" ]
-then
-	echo "A Dockerfile for this combination of options does not exist. $DOCKERFILE does not exist."
-else
-	docker build \
-	  --build-arg VCS_REF=`git rev-parse --short HEAD` \
-	  --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
-	  --rm --force-rm $EXPERIMENTAL_ARGS -t "duncdrum/exist-db:${BRANCH_NAME}" --file "${DOCKERFILE}" . 1> build.log 2> errors.log
-fi
+# EXPERIMENTAL_ARGS=""
+# if [ "$EXPERIMENTAL" == "YES" ]
+# then
+# 	EXPERIMENTAL_ARGS="--squash"
+# fi
+#
+# BRANCH_NAME="${BRANCH_NAME}${SUFFIX}"
+#
+# if [ ! -f "$DOCKERFILE" ]
+# then
+# 	echo "A Dockerfile for this combination of options does not exist. $DOCKERFILE does not exist."
+# else
+# 	docker build \
+# 	  --build-arg VCS_REF=`git rev-parse --short HEAD` \
+# 	  --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
+# 	  --rm --force-rm $EXPERIMENTAL_ARGS -t "duncdrum/exist-db:${BRANCH_NAME}" --file "${DOCKERFILE}" . 1> build.log 2> errors.log
+# fi

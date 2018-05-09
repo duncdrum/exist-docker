@@ -9,5 +9,6 @@ before_install:
   - docker build -t duncdrum/exist-docker .
   - docker run -it -d --name exist -p 8080:8080 duncdrum/exist-docker
 script:
+  - docker exec exist java -version
   - docker logs exist
   - docker ps -a
