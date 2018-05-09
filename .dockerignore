@@ -5,4 +5,4 @@
 *.tmpl
 .travis.yml
 appveyor.yml
-*.bat
+*.bat 

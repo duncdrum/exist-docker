@@ -7,7 +7,7 @@ services:
 
 before_install:
   - docker build -t duncdrum/exist-docker .
+  - docker run -it -d --name exist -p 8080:8080 duncdrum/exist-docker
 script:
-  - docker run -it -d -p 8080:8080 duncdrum/exist-docker
-  - docker log duncdum/exist-docker
+  - docker logs exist
   - docker ps -a

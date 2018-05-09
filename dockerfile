@@ -10,8 +10,6 @@ ARG VCS_REF
 ARG BUILD_DATE
 
 # env for builder
-# ENV EXIST_HOME /usr/local/eXist
-# ENV EXIST_DATA_DIR webapp/WEB-INF/data
 ENV INSTALL_PATH /target
 
 # Install tools required to build the project
