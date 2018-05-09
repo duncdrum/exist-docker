@@ -1,23 +1,13 @@
 sudo: required
 
-language: java
-
-jdk:
-  - openjdk8
-  - oraclejdk8
-#  - oraclejdk9
+language: ruby
 
 services:
   - docker
 
-addons:
-  apt:
-    packages:
-      - augeas-tools
-
 before_install:
-  - docker info
-  - ./build.sh --no-experimental --minimal eXist develop
-
+  - docker build -t duncdrum/exist-docker .
 script:
-  - docker run -it --rm duncdrum/docker-exist:latest -Dexist.home=/exist -jar /exist/start.jar client --no-gui --local --xpath "system:get-version()"
+  - docker run -it -d -p 8080:8080 duncdrum/exist-docker
+  - docker log duncdum/exist-docker
+  - docker ps -a
