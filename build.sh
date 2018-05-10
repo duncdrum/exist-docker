@@ -191,7 +191,7 @@ else
 	else
   		cd "${EXIST_CLONE}"
 		git fetch origin
-		git checkout "${BRANCH_NAME}"
+		git checkout -b "${BRANCH_NAME}"
 		if git describe --exact-match --tags HEAD > /dev/null
 		then
 			# this is a tag, don't need to rebase (update)
