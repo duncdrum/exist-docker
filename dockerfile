@@ -8,17 +8,9 @@ LABEL maintainer="Duncan Paterson <d.paterson@me.com>" \
 
 # arguments can be referenced at build time …
 ARG BRANCH=develop
-ARG MAX_MEM=2048
-ARG CACHE_MEM=256
-ARG DATA_DIR=webapp/WEB-INF/data
-
-# … but also in here.
-ENV BRANCH ${BRANCH}
-ENV MAX_MEM ${MAX_MEM}
-ENV CACHE_MEM ${CACHE_MEM}
-ENV DATA_DIR ${DATA_DIR}
 
 # ENV for builder
+ENV BRANCH ${BRANCH}
 ENV INSTALL_PATH /target
 
 # Install tools required to build the project
@@ -40,12 +32,28 @@ RUN apk add --no-cache --virtual .build-deps \
 
 FROM gcr.io/distroless/java:latest
 
+ARG MAX_MEM=2048
+ARG CACHE_MEM=256
+
+# … but also in here.
+
+ENV MAX_MEM ${MAX_MEM}
+ENV CACHE_MEM ${CACHE_MEM}
+
+
+# ENV for gcr
+# ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 ENV EXIST_HOME /exist
+ENV DATA_DIR /exist-data
+
+VOLUME ${DATA_DIR}
+
 WORKDIR ${EXIST_HOME}
 
 # Copy compiled exist-db files
 COPY --from=builder /target/exist-minimal .
 COPY --from=builder /target/conf.xml ./conf.xml
+COPY --from=builder /target/exist/webapp/WEB-INF/data ${DATA_DIR}
 
 # Copy over dependancies for Apache FOP, which are lacking from gcr image
 
@@ -61,5 +69,7 @@ ENV LANG C.UTF-8
 # Port configuration
 EXPOSE 8080
 EXPOSE 8443
+
+HEALTHCHECK CMD java -Dexist.home=/exist -jar /exist/start.jar client --no-gui --local --xpath "system:get-version()"
 
 ENTRYPOINT ["java", "-Djava.awt.headless=true", "-jar", "start.jar", "jetty"]
