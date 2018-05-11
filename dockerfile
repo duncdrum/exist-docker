@@ -1,6 +1,9 @@
 FROM openjdk:8-jdk-alpine as builder
 
-LABEL maintainer="Duncan Paterson <d.paterson@me.com>" \
+LABEL name="exist-db docker image with FO support" \
+      vendor="exist-db.org" \
+      maintainer="Duncan Paterson" \
+      org.label-schema.url="https://exist-db.org" \
       org.label-schema.build-date="$(date --iso)" \
       org.label-schema.vcs-ref="$(git rev-parse --short HEAD)" \
       org.label-schema.vcs-url="https://github.com/duncdrum/exist-docker" \
@@ -25,7 +28,7 @@ RUN apk add --no-cache --virtual .build-deps \
         curl \
         git \
         ttf-dejavu \
-        && bash ./build.sh --minimal eXist ${BRANCH} \
+        && bash ./build.sh --minimal ${BRANCH} \
         && rm -rf tmp \
         && apk del .build-deps
 
@@ -72,4 +75,6 @@ EXPOSE 8443
 
 HEALTHCHECK CMD java -Dexist.home=/exist -jar /exist/start.jar client --no-gui --local --xpath "system:get-version()"
 
-ENTRYPOINT ["java", "-Djava.awt.headless=true", "-jar", "start.jar", "jetty"]
+ENTRYPOINT ["java", "-Djava.awt.headless=true", "-Dorg.exist.db-connection.cacheSize=${CACHE_MEM}M",
+"-Dmemory.max=${MAX_MEM}",
+"-jar", "start.jar", "jetty"]

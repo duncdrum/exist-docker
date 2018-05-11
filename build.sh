@@ -183,7 +183,7 @@ then
 	NORECOMPILE=NO
 	git clone https://github.com/exist-db/exist.git "${EXIST_CLONE}"
 	cd "${EXIST_CLONE}"
-	git checkout -b "${BRANCH_NAME}"
+	git checkout "${BRANCH_NAME}"
 else
 	if [ "$NORECOMPILE" == "YES" ]
 	then
@@ -191,7 +191,7 @@ else
 	else
   		cd "${EXIST_CLONE}"
 		git fetch origin
-		git checkout -b "${BRANCH_NAME}"
+		git checkout "${BRANCH_NAME}"
 		if git describe --exact-match --tags HEAD > /dev/null
 		then
 			# this is a tag, don't need to rebase (update)
