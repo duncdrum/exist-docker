@@ -68,7 +68,7 @@ minify_exist() {
 
 	# copy sundries
 	# DP: why? add them to dockerignore would be more like it
-	cp "${EXIST_CLONE}/LICENSE" "${EXIST_CLONE}/README.md" "${EXIST_MINIMAL}"
+	cp "${EXIST_CLONE}/LICENSE" "${EXIST_CLONE}/client.properties" "${EXIST_MINIMAL}"
 
 	# copy base folders
 	cp -r "${EXIST_CLONE}/autodeploy" "${EXIST_CLONE}/bin" "${EXIST_MINIMAL}"
