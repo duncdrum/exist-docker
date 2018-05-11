@@ -35,23 +35,27 @@ RUN apk add --no-cache --virtual .build-deps \
 
 FROM gcr.io/distroless/java:latest
 
-ARG MAX_MEM=2048
-ARG CACHE_MEM=256
+ARG MAX_MEM
+ARG CACHE_MEM
 
 # … but also in here.
 
-ENV MAX_MEM ${MAX_MEM}
-ENV CACHE_MEM ${CACHE_MEM}
-
+ENV MAX_MEM -Dorg.exist.db-connection.cacheSize=${MAX_MEM:-2048}M
+ENV CACHE_MEM -Xmx${CACHE_MEM:-256}M
 
 # ENV for gcr
-# ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 ENV EXIST_HOME /exist
 ENV DATA_DIR /exist-data
 
-VOLUME ${DATA_DIR}
+# VOLUME ${DATA_DIR}
 
 WORKDIR ${EXIST_HOME}
+
+# Add customized configuration files
+# ADD ./src/conf.xml .
+ADD ./src/log4j2.xml .
+# ADD ./src/mime-types.xml .
 
 # Copy compiled exist-db files
 COPY --from=builder /target/exist-minimal .
@@ -75,6 +79,5 @@ EXPOSE 8443
 
 HEALTHCHECK CMD java -Dexist.home=/exist -jar /exist/start.jar client --no-gui --local --xpath "system:get-version()"
 
-ENTRYPOINT ["java", "-Djava.awt.headless=true", "-Dorg.exist.db-connection.cacheSize=${CACHE_MEM}M",
-"-Dmemory.max=${MAX_MEM}",
-"-jar", "start.jar", "jetty"]
+ENTRYPOINT ["java", "-Djava.awt.headless=true", "-jar", "start.jar", "jetty"]
+CMD ["${CACHE_MEM}", "${MAX_MEM}" ]
