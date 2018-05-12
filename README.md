@@ -11,15 +11,16 @@ This repository holds the source files for building a minimal docker image of th
 
 ## How to use
 Pre-build images are available on [DockerHub](https://hub.docker.com/r/duncdrum/exist-docker/). There are two channels:
-*   'stable' for the latest stable releases (recommended for production)
-*   'latest' for last commit to the development branch.
+*   `stable` for the latest stable releases (recommended for production)
+*   `latest` for last commit to the development branch.
 
 To download the image run:
 ```bash
 docker pull duncdrum/exist-docker:latest
 docker run -it -d -p 8080:8080 -p 8443:8443 duncdrum/exist-docker:latest
 ```
-You can now access exist via [localhost:8080](localhost:8080)in your browser.
+
+You can now access exist via [localhost:8080](localhost:8080) in your browser.
 Try to stick with matching internal and external port assignments, to avoid unnecessary reloads and connection issues.
 
 To stop the container issue:
@@ -48,7 +49,6 @@ docker-compose down
 ```
 
 Docker compose defines a data volume for eXist named `exist-data` so that changes to apps persist through reboots. You can inspect the volume via:
-
 ```bash
 docker volume inspect exist-data
 ```
@@ -96,7 +96,7 @@ docker run -it -d -e MAX_MEM=768 exist
 configures exist to run with a heapsize of 768m. This can be helpful for using exist on small instances such as AWS micro instances.
 
 Since the distroless images does not provide a shell, the configuration files in the `/src` folder are there to simplify the configuration customization of your eXist instance. Make your customizations and uncomment the following lines in the Dockerfile.
-```
+```bash
 # Add customized configuration files
 # ADD ./src/conf.xml .
 # ADD ./src/log4j2.xml .
