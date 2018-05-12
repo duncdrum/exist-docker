@@ -1,6 +1,6 @@
 FROM openjdk:8-jdk-alpine as builder
 
-LABEL name="exist-db docker image with FO support" \
+LABEL name="minimal exist-db docker image with FO support" \
       vendor="exist-db.org" \
       maintainer="Duncan Paterson" \
       org.label-schema.url="https://exist-db.org" \
