@@ -83,7 +83,7 @@ minify_exist() {
 	cp "${EXIST_CLONE}/descriptor.xml" "${EXIST_CLONE}/log4j2.xml" "${EXIST_CLONE}/mime-types.xml" "${EXIST_MINIMAL}"
 
 	# copy tools
-	# DP: do we need to keep them or can they be discarded after the build?
+	# DP: do we need to keep ant or can it be discarded after the build?
 	mkdir -p "${EXIST_MINIMAL}/tools"
 	cp -r "${EXIST_CLONE}/tools/ant" "${EXIST_CLONE}/tools/aspectj" "${EXIST_CLONE}/tools/jetty" "${EXIST_MINIMAL}/tools"
 

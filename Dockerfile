@@ -38,9 +38,9 @@ FROM gcr.io/distroless/java:latest
 ARG MAX_MEM
 ARG CACHE_MEM
 
-# … but also in here.
+# Adjust as necessary via run or build
 
-ENV MAX_MEM -Dorg.exist.db-connection.cacheSize=${MAX_MEM:-2048}M
+ENV MAX_MEM -Dorg.exist.db-connection.cacheSize=${MAX_MEM:-1856}M
 ENV CACHE_MEM -Xmx${CACHE_MEM:-256}M
 
 # ENV for gcr
