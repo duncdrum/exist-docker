@@ -69,8 +69,7 @@ docker-compose pull
 ### Caveat
 As with normal installations, the password for the default dba user `admin` is empty. Change it via the [usermanager](http://localhost:8080/exist/apps/usermanager/index.html) or set the password to e.g. `123` from docker CLI:
 ```bash
-docker exec exist java -jar start.jar client -q -u admin -P admin -x \
- 'sm:passwd("admin", "123")'
+docker exec exist java -jar start.jar client -q -u admin -P '' -x 'sm:passwd("admin", "123")'
 ```
 Note: `123` is not a good password.
 
@@ -131,7 +130,7 @@ You can now interact with a running container as if it were a regular linux host
 
 ```bash
 # Copy my-data.xml from running eXist to local folder
-docker cp exist:/exist/data/my-data.xml ./my-folder
+docker cp exist-data:/apps/my-app/data/my-data.xml ./my-folder
 
 # Using java syntax on a running eXist instances
 docker exec exist java -jar start.jar client --no-gui --xpath "system:get-memory-max()"
