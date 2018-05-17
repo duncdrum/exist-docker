@@ -1,6 +1,5 @@
 FROM openjdk:8-jdk-alpine as builder
 
-
 # arguments can be referenced at build time …
 ARG BRANCH=develop
 
