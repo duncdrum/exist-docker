@@ -12,4 +12,4 @@ script:
   - docker ps -a
   - docker logs exist
   - docker exec exist java -version
-  - docker exec exist java -Dexist.home=/exist -jar /exist/start.jar client --local --no-gui --xpath "system:get-version()"
+  - docker exec exist java -jar start.jar jetty client --no-gui --xpath "system:get-version()"
