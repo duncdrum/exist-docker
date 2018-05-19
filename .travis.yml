@@ -8,7 +8,10 @@ services:
 before_install:
   - docker build -t duncdrum/exist-docker .
   - docker run -it -d --name exist -p 8080:8080 duncdrum/exist-docker
+
+before_script:
+  - sleep 35
 script:
   - docker exec exist java -version
   - docker logs exist
-  - travis_wait 30 docker ps -a
+  - docker ps -a
