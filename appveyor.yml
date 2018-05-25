@@ -1,6 +1,6 @@
 image:
-  - Ubuntu
   - Visual Studio 2017
+  - Ubuntu
 
 for:
 -
@@ -8,24 +8,9 @@ for:
     only:
       - image: Visual Studio 2017
   before_build:
-  image:
-  - Ubuntu
-  - Visual Studio 2017
-
-for:
--
-  matrix:
-    only:
-      - image: Visual Studio 2017
-  before_build:
-  - ps: $progressPreference = 'silentlyContinue'
-  - ps: mkdir "$Env:ProgramFiles\Linux Containers"
-  - ps: Invoke-WebRequest -UseBasicParsing -OutFile linuxkit.zip https://github.com/friism/linuxkit/releases/download/preview-1/linuxkit.zip
-  - ps: Expand-Archive linuxkit.zip -DestinationPath "$Env:ProgramFiles\Linux Containers\."
-  - ps: rm linuxkit.zip
   - ps: $Env:LCOW_SUPPORTED=1
   - ps: $Env:LCOW_API_PLATFORM_IF_OMITTED="linux"
-  - ps: .\dockerd.exe -D --experimental -H "npipe:////./pipe//docker_lcow" --data-root c:\lcow
+  - ps: Restart-Service Docker
 
 build_script:
   - docker build -t duncdrum/exist-docker .
