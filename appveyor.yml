@@ -1,0 +1,48 @@
+image:
+  - Ubuntu
+  - Visual Studio 2017
+
+for:
+-
+  matrix:
+    only:
+      - image: Visual Studio 2017
+  before_build:
+  image:
+  - Ubuntu
+  - Visual Studio 2017
+
+for:
+-
+  matrix:
+    only:
+      - image: Visual Studio 2017
+  before_build:
+  - ps: $Env:LCOW_SUPPORTED=1
+  - ps: $Env:LCOW_API_PLATFORM_IF_OMITTED="linux"
+
+
+build_script:
+  - docker build -t duncdrum/exist-docker .
+  - docker run -it -d --name exist -p 8080:8080 duncdrum/exist-docker
+
+before_test:
+  - sleep 35
+
+test_script:
+  - docker exec exist java -version
+  - docker logs exist
+  - docker ps -a
+
+
+build_script:
+  - docker build -t duncdrum/exist-docker .
+  - docker run -it -d --name exist -p 8080:8080 duncdrum/exist-docker
+
+before_test:
+  - sleep 35
+
+test_script:
+  - docker exec exist java -version
+  - docker logs exist
+  - docker ps -a
