@@ -1,6 +1,6 @@
 FROM openjdk:8-jdk-alpine as builder
 
-# arguments can be referenced at build time …
+# arguments can be referenced at build time chose master for the stable release channel
 ARG BRANCH=develop
 
 # ENV for builder
