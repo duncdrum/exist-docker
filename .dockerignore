@@ -1,10 +1,11 @@
+# Repo
 .github/
 .git/
 .idea/
 .DS_Store
 *.md
-*.tmpl
 .travis.yml
 appveyor.yml
-*.bat
+.notes
+*.tmpl
 *.lck
