@@ -20,6 +20,12 @@ RUN apk add --no-cache --virtual .build-deps \
         git \
         && bash ./build.sh --minimal ${BRANCH} \
         && rm -rf tmp \
+        target/exist-minimal/autodeploy/*.xar \
+        target/exist-minimal/bin/* \
+        target/exist-minimal/lib/test/easymock-*.jar \
+        target/exist-minimal/lib/test/junit-*.jar \
+        target/exist-minimal/tools/jetty/standalone-* \
+        target/exist-minimal/tools/jetty/etc/standalone/** \
         && apk del .build-deps
 
 FROM openjdk:8-jdk-slim as jdk
