@@ -1,4 +1,7 @@
 # docker-eXist (WIP)
+
+!! Development has stalled, and moved to [eXist-db/docker-existdb](https://github.com/eXist-db/docker-existdb) !!
+
 minimal exist-db docker image with FO support
 
 [![Build Status](https://travis-ci.org/duncdrum/exist-docker.svg?branch=master)](https://travis-ci.org/duncdrum/exist-docker)
